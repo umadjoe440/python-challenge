@@ -36,13 +36,20 @@ print("-------------------------")
 print(f"Total Votes:  {votes}")
 print("-------------------------")
 
+highest_vote_count = 0
+winner = 'nobody'
+
 for key, value in election_results.items():
     candidate = key
     vote_pct = value/votes
     vote_pct_out = "{:.3%}".format(vote_pct)
     candidate_votes = value
+    if candidate_votes > highest_vote_count:
+        winner = key
+        highest_vote_count = candidate_votes
+
     print(f"{candidate}: {vote_pct_out} ({candidate_votes})")
 
 print("-------------------------")
-
+print(f"Winner:  {winner}")
 print("-------------------------")
