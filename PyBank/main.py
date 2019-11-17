@@ -65,5 +65,5 @@ with open(csvpath, newline='') as csvfile:
     print(f"Greatest Increase in Profits: {greatest_increase_month} {locale.currency(greatest_increase_amount)}")
     print(f"Greatest Decrease in Profits: {greatest_decrease_month} {locale.currency(greatest_decrease_amount)}")
 
-    #for month in monthly_list:
-    #    print(month)
+    for month in monthly_list:
+        print(month)
