@@ -48,22 +48,23 @@ with open(csvpath, newline='') as csvfile:
     # The total number of months included in the dataset
     print(f"Total Months:  {months}")
     # The net total amount of "Profit/Losses" over the entire period
-    print(f"Total: $ {locale.currency(total_money)}")
+    total_money_out = "${:0.0f}".format(total_money)
+    print(f"Total:  {total_money_out}")
     #print(monthly_list)
 
     #calculate average
     sum_monthly_changes = sum([m[1] for m in monthly_list])
     average_change = sum_monthly_changes/len(monthly_list)
-    print(f"Average Change:  {locale.currency(average_change)}")
+    average_change_out = "${:0.2f}".format(average_change)
+    print(f"Average Change:  {average_change_out}")
 
     #greatest increase and decrease
     greatest_increase_month = max(monthly_list,key=operator.itemgetter(1))[0]
     greatest_increase_amount = max(monthly_list,key=operator.itemgetter(1))[1]
+    greatest_increase_out = "${:0.0f}".format(greatest_increase_amount)
     greatest_decrease_month = min(monthly_list,key=operator.itemgetter(1))[0]
     greatest_decrease_amount = min(monthly_list,key=operator.itemgetter(1))[1]
+    greatest_decrease_out = "${:0.0f}".format(greatest_decrease_amount)
 
-    print(f"Greatest Increase in Profits: {greatest_increase_month} {locale.currency(greatest_increase_amount)}")
-    print(f"Greatest Decrease in Profits: {greatest_decrease_month} {locale.currency(greatest_decrease_amount)}")
-
-    for month in monthly_list:
-        print(month)
+    print(f"Greatest Increase in Profits: {greatest_increase_month} ({greatest_increase_out})")
+    print(f"Greatest Decrease in Profits: {greatest_increase_month} ({greatest_decrease_out})")
