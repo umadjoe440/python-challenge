@@ -3,19 +3,16 @@
 import csv
 import os
 import operator
-import locale
 
-locale.setlocale( locale.LC_ALL, '')
 csvpath = os.path.join("c:/Resources/budget_data.csv")
+outpath = os.path.join("c:/Resources/budget_report.txt")
 
 with open(csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    #Read and print the header row...
     # Read the header row first (skip this step if there is no header)
     csv_header = next(csvreader)
-    #print(f"CSV Header: {csv_header}")
-
+    
     row_list = []
     monthly_list = []
     months = 0
@@ -41,22 +38,32 @@ with open(csvpath, newline='') as csvfile:
     #res1 = min(test_list)[0], max(test_list)[0] 
     #res2 = min(test_list)[1], max(test_list)[1] 
 
+    report_file = open(outpath, "w")
+
     print("Financial Analysis")
     print("----------------------------")
     print()
 
+    report_file.write("Financial Analysis\n")
+    report_file.write("----------------------------\n")
+    report_file.write("\n")
+
+
     # The total number of months included in the dataset
     print(f"Total Months:  {months}")
+    report_file.write(f"Total Months:  {months}\n")
     # The net total amount of "Profit/Losses" over the entire period
     total_money_out = "${:0.0f}".format(total_money)
     print(f"Total:  {total_money_out}")
-    #print(monthly_list)
+    report_file.write(f"Total:  {total_money_out}\n")
+    
 
     #calculate average
     sum_monthly_changes = sum([m[1] for m in monthly_list])
     average_change = sum_monthly_changes/len(monthly_list)
     average_change_out = "${:0.2f}".format(average_change)
     print(f"Average Change:  {average_change_out}")
+    report_file.write(f"Average Change:  {average_change_out}\n")
 
     #greatest increase and decrease
     greatest_increase_month = max(monthly_list,key=operator.itemgetter(1))[0]
@@ -68,3 +75,6 @@ with open(csvpath, newline='') as csvfile:
 
     print(f"Greatest Increase in Profits: {greatest_increase_month} ({greatest_increase_out})")
     print(f"Greatest Decrease in Profits: {greatest_increase_month} ({greatest_decrease_out})")
+
+    report_file.write(f"Greatest Increase in Profits: {greatest_increase_month} ({greatest_increase_out})\n")
+    report_file.write(f"Greatest Decrease in Profits: {greatest_increase_month} ({greatest_decrease_out})\n")
