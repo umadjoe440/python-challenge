@@ -7,6 +7,7 @@ import operator
 csvpath = os.path.join("c:/Resources/budget_data.csv")
 outpath = os.path.join("c:/Resources/budget_report.txt")
 
+# open budget data file
 with open(csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
@@ -22,7 +23,7 @@ with open(csvpath, newline='') as csvfile:
         total_money += float(row[1])
         row_list.append((row[0],row[1]))
         
-    
+    #JGP generate another list of tuples with month and monthly profit/loss
     for r in row_list:
         if row_list.index(r) == 0:
             start_profit = float(r[1])
@@ -32,12 +33,8 @@ with open(csvpath, newline='') as csvfile:
             monthly_list.append((r[0],monthly_diff))
             start_profit = end_profit
             
-    
-    #JGP generate another list of tuples with month and monthly profit/loss
-    #JGP then run the below function against the new list
-    #res1 = min(test_list)[0], max(test_list)[0] 
-    #res2 = min(test_list)[1], max(test_list)[1] 
 
+    #open report file for writing    
     report_file = open(outpath, "w")
 
     print("Financial Analysis")
