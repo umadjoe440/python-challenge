@@ -7,6 +7,8 @@ import operator
 csvpath = os.path.join("c:/Resources/budget_data.csv")
 outpath = os.path.join("c:/Resources/budget_report.txt")
 
+
+
 # open budget data file
 with open(csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
@@ -71,7 +73,7 @@ with open(csvpath, newline='') as csvfile:
     greatest_decrease_out = "${:0.0f}".format(greatest_decrease_amount)
 
     print(f"Greatest Increase in Profits: {greatest_increase_month} ({greatest_increase_out})")
-    print(f"Greatest Decrease in Profits: {greatest_increase_month} ({greatest_decrease_out})")
+    print(f"Greatest Decrease in Profits: {greatest_decrease_month} ({greatest_decrease_out})")
 
     report_file.write(f"Greatest Increase in Profits: {greatest_increase_month} ({greatest_increase_out})\n")
-    report_file.write(f"Greatest Decrease in Profits: {greatest_increase_month} ({greatest_decrease_out})\n")
+    report_file.write(f"Greatest Decrease in Profits: {greatest_decrease_month} ({greatest_decrease_out})\n")
